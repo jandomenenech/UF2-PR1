@@ -14,10 +14,12 @@ public class Game implements Serializable {
     private ArrayList<String> genres;
     private String summary;
     private ArrayList<String> reviews;
-    private String plays;
-    private String playing;
-    private String backlogs;
-    private String wishlist;
+    private int plays;
+    private int  playing;
+    private int backlogs;
+    private int wishlist;
+
+
 
     public int getId() {
         return id;
@@ -99,41 +101,41 @@ public class Game implements Serializable {
         this.reviews = reviews;
     }
 
-    public String getPlays() {
+    public int getPlays() {
         return plays;
     }
 
-    public void setPlays(String plays) {
+    public void setPlays(int plays) {
         this.plays = plays;
     }
 
-    public String getPlaying() {
+    public int getPlaying() {
         return playing;
     }
 
-    public void setPlaying(String playing) {
+    public void setPlaying(int playing) {
         this.playing = playing;
     }
 
-    public String getBacklogs() {
+    public int getBacklogs() {
         return backlogs;
     }
 
-    public void setBacklogs(String backlogs) {
+    public void setBacklogs(int backlogs) {
         this.backlogs = backlogs;
     }
 
-    public String getWishlist() {
+    public int getWishlist() {
         return wishlist;
     }
 
-    public void setWishlist(String wishlist) {
+    public void setWishlist(int wishlist) {
         this.wishlist = wishlist;
     }
 
     public Game(int id, String title, String releaseDate, ArrayList<String> team, double rating, int timesListed,
-                int numberOfReviews, ArrayList<String> genres, String summary, ArrayList<String> reviews, String plays,
-                String playing, String backlogs, String wishlist) {
+                int numberOfReviews, ArrayList<String> genres, String summary, ArrayList<String> reviews, int plays,
+                int playing, int backlogs, int wishlist) {
         this.id = id;
         this.title = title;
         this.releaseDate = releaseDate;
