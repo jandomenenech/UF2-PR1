@@ -4,26 +4,28 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Game implements Serializable {
-    private int id;
+    private String id;
     private String title;
     private String releaseDate;
     private ArrayList<String> team;
-    private double rating;
-    private int timesListed;
-    private int numberOfReviews;
+    private String rating;
+    private String timesListed;
+    private String numberOfReviews;
     private ArrayList<String> genres;
     private String summary;
     private ArrayList<String> reviews;
     private String plays;
-    private String playing;
+    private String  playing;
     private String backlogs;
     private String wishlist;
 
-    public int getId() {
+
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -51,27 +53,27 @@ public class Game implements Serializable {
         this.team = team;
     }
 
-    public double getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(double rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
-    public int getTimesListed() {
+    public String getTimesListed() {
         return timesListed;
     }
 
-    public void setTimesListed(int timesListed) {
+    public void setTimesListed(String timesListed) {
         this.timesListed = timesListed;
     }
 
-    public int getNumberOfReviews() {
+    public String getNumberOfReviews() {
         return numberOfReviews;
     }
 
-    public void setNumberOfReviews(int numberOfReviews) {
+    public void setNumberOfReviews(String numberOfReviews) {
         this.numberOfReviews = numberOfReviews;
     }
 
@@ -131,8 +133,8 @@ public class Game implements Serializable {
         this.wishlist = wishlist;
     }
 
-    public Game(int id, String title, String releaseDate, ArrayList<String> team, double rating, int timesListed,
-                int numberOfReviews, ArrayList<String> genres, String summary, ArrayList<String> reviews, String plays,
+    public Game(String id, String title, String releaseDate, ArrayList<String> team, String rating, String timesListed,
+                String numberOfReviews, ArrayList<String> genres, String summary, ArrayList<String> reviews, String plays,
                 String playing, String backlogs, String wishlist) {
         this.id = id;
         this.title = title;
