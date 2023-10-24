@@ -5,10 +5,9 @@ import com.google.gson.GsonBuilder;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.w3c.dom.Document;
+import org.dom4j.Document;
 import org.dom4j.Element;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,18 +15,6 @@ import java.util.*;
 import org.dom4j.DocumentHelper;
 import org.dom4j.io.XMLWriter;
 import org.dom4j.io.OutputFormat;
-import java.io.File;
-
-import org.w3c.dom.Node;
-import org.w3c.dom.Text;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import java.io.File;
 import java.util.List;
 
 
@@ -235,7 +222,7 @@ public class Funcions {
 
     public static Document createGameXml(Game game) {
         Document document = (Document) DocumentHelper.createDocument();
-        Element rootElement = (Element) document.createElement("game");
+        Element rootElement = (Element) document.addElement("game");
 
         rootElement.addElement("id").setText(String.valueOf(game.getId()));
         rootElement.addElement("title").setText(game.getTitle());
@@ -273,20 +260,6 @@ public class Funcions {
         return document;
     }
 
-
-
-    public static void writeGameXmlToFile(Game game, String filePath) {
-            Document document = createGameXml(game);
-
-            try {
-                OutputFormat format = OutputFormat.createPrettyPrint();
-                XMLWriter writer = new XMLWriter(new FileOutputStream(filePath), format);
-                writer.write(document);
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     public static void crearArchivoJson(List<Game> game) {
         // Crear una instancia de Gson sin formateo "pretty"
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -295,7 +268,7 @@ public class Funcions {
         String json = gson.toJson(game);
 
         // Reemplazar las secuencias de escape \u0027 con comillas simples
-        String cleanedJson = json.replaceAll("\\\\u0027", "'");
+        String cleanedJson = json.replaceAll("\\\\u0027", "'").replace("\\\n","");
 
         // Escribir el JSON formateado a un archivo
         try (FileWriter writer = new FileWriter("miArchivo.json")) {
@@ -304,8 +277,61 @@ public class Funcions {
             e.printStackTrace();
         }
     }
+        public static Document exportToXML(List<Game> games, String fileName) {
+            // Crear un objeto Document y agregar elementos
+            Document document = (Document) DocumentHelper.createDocument();
+            Element root = (Element) document.addElement("games");
 
+            for (Game game : games) {
+                Element gameElement = root.addElement("game");
+                gameElement.addElement("id").addText(game.getId());
+                gameElement.addElement("title").addText(game.getTitle());
+                gameElement.addElement("releaseDate").addText(game.getReleaseDate());
+
+                Element teamElement = gameElement.addElement("team");
+                for (String member : game.getTeam()) {
+                    teamElement.addElement("member").addText(member);
+                }
+
+                gameElement.addElement("rating").addText(game.getRating());
+                gameElement.addElement("timesListed").addText(game.getTimesListed());
+                gameElement.addElement("numberOfReviews").addText(game.getNumberOfReviews());
+
+                Element genresElement = gameElement.addElement("genres");
+                for (String genre : game.getGenres()) {
+                    genresElement.addElement("genre").addText(genre);
+                }
+
+                gameElement.addElement("summary").addText(game.getSummary());
+
+                Element reviewsElement = gameElement.addElement("reviews");
+                for (String review : game.getReviews()) {
+                    reviewsElement.addElement("review").addText(review);
+                }
+
+                gameElement.addElement("plays").addText(game.getPlays());
+                gameElement.addElement("playing").addText(game.getPlaying());
+                gameElement.addElement("backlogs").addText(game.getBacklogs());
+                gameElement.addElement("wishlist").addText(game.getWishlist());
+            }
+            return document;
+        }
+    public static void writeGameXmlToFile(List<Game> games, String filePath) {
+        Document document = exportToXML(games,filePath);
+
+        try {
+            OutputFormat format = OutputFormat.createPrettyPrint();
+            XMLWriter writer = new XMLWriter(new FileOutputStream(filePath), format);
+            writer.write(document);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+
+
 
 
 

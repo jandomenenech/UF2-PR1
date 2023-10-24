@@ -18,7 +18,7 @@ public class Main {
         String inputCsvFileName = "src/main/java/org/example/Games.txt";
         games = csvReader.readGames(inputCsvFileName);
         String opcion = "";
-        while (!opcion.equalsIgnoreCase("3")||!opcion.equalsIgnoreCase("salir")){
+        while (!opcion.equalsIgnoreCase("3")&&!opcion.equalsIgnoreCase("salir")){
         System.out.println("Elije una opcion");
         System.out.println("1.Exportar");
         System.out.println("2.Consultas");
@@ -27,6 +27,10 @@ public class Main {
         switch (opcion){
             case "1","exportar":
                 System.out.println("Elije otra opcion");
+                System.out.println("1.CSV");
+                System.out.println("2.JSON");
+                System.out.println("3.XML");
+                System.out.println("4.Salir");
                 String exportar = pro.nextLine();
                 switch (exportar){
                     case "1","csv":
@@ -43,8 +47,7 @@ public class Main {
                         String csvFileName = "src/main/java/org/example/ExportedGames.csv";
                         String xmlFileName = "src/main/java/org/example/Eso.xml;";
                         for (Game game : games) {
-
-                            csvReader.writeGameXmlToFile(game, xmlFileName);
+                            csvReader.writeGameXmlToFile(games,xmlFileName);
                                 }
                         break;
                     case "4","salir":
@@ -57,6 +60,7 @@ public class Main {
             case "2","consultas":
                 break;
             case "3","salir":
+                System.out.println("adeu");
                 break;
             default:
                 System.err.println("Opcion incorrecta");
