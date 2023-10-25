@@ -13,6 +13,7 @@ import static org.example.Funcions.*;
 public class Main {
     public static List<Game> games;
     public static Scanner pro = new Scanner(System.in);
+    public static List<Game> games;
     public static void main(String[] args) {
         Funcions csvReader = new Funcions();
         String inputCsvFileName = "src/main/java/org/example/Games.txt";
