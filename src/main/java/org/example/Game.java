@@ -152,6 +152,26 @@ public class Game implements Serializable {
         this.wishlist = wishlist;
 
     }
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", releaseDate='" + releaseDate + '\'' +
+                ", team=" + team +
+                ", rating='" + rating + '\'' +
+                ", timesListed='" + timesListed + '\'' +
+                ", numberOfReviews='" + numberOfReviews + '\'' +
+                ", genres=" + genres +
+                ", summary='" + summary + '\'' +
+                ", reviews=" + reviews +
+                ", plays='" + plays + '\'' +
+                ", playing='" + playing + '\'' +
+                ", backlogs='" + backlogs + '\'' +
+                ", wishlist='" + wishlist + '\'' +
+                '}';
+    }
+
 
 
 }
